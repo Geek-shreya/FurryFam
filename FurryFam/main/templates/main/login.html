@@ -1,0 +1,49 @@
+{% extends "main/basic.html" %}
+
+{% block title%} Log In {% endblock %}
+
+{% block css %} 
+
+      h3{
+        text-align: center;
+      }
+
+{% endblock %} 
+
+{%block body %} 
+
+<div class="container my-3">
+    <h3>Log In</h3>
+    <form action="/main/login/" method="post">{% csrf_token %}
+ <div class="form-group">
+   <label for="name">Name</label>
+   <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name">
+ </div>
+         <div class="form-group">
+   <label for="name">Email</label>
+   <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email">
+ </div>
+
+ <div class="form-group">
+  <label for="name">Contact Number</label>
+  <input type="phone" class="form-control" id="phone" name="phone" placeholder="Enter Contact Number">
+</div>
+
+         <div class="form-group">
+   <label for="name">Password</label>
+   <input type="password" class="form-control" id="phone" name="phone" placeholder="Enter Password">
+ </div>
+
+ <div class="form-group">
+    <label for="name">Verify Password</label>
+    <input type="password" class="form-control" id="phone" name="phone" placeholder="Verify Password">
+  </div>
+         <div class="form-group">
+  {% comment %} <div class="form-group">
+   <label for="desc">How May We Help You ?</label>
+   <textarea class="form-control" id="desc" name="desc" rows="3"></textarea>
+ </div> {% endcomment %}
+
+ <button type="submit" class="btn btn-success my-4">Submit</button>
+
+{% endblock %}
