@@ -1,131 +1,613 @@
-{%extends "main/basic.html"%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FurryFam{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="/media/logo.jpg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css"  rel="stylesheet" />
+</head>
+<body>
+    {% block body %}
+    <!-- navbar -->
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+  <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+      <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src="/media/logo.jpg" class="h-8" alt="Flowbite Logo" />
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">FurryFam</span>
+      </a>
+      <div class="flex items-center space-x-6 rtl:space-x-reverse">
+          <a href="tel:5541251234" class="text-sm  text-gray-500 dark:text-white hover:underline">Helpline -> 8448449955</a>
+          <a href="/main/login" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>
+      </div>
+  </div>
+</nav>
+<nav class="bg-gray-50 dark:bg-gray-700">
+  <div class="max-w-screen-xl px-4 py-3 mx-auto">
+      <div class="flex items-center">
+          <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
+              <li>
+                  <a href="/main" class="text-gray-900 dark:text-white hover:underline" aria-current="page">Home</a>
+              </li>
+              <li>
+                  <a href="/main/about" class="text-gray-900 dark:text-white hover:underline">About Us</a>
+              </li>
+              <li>
+                  <a href="/main/login" class="text-gray-900 dark:text-white hover:underline">Tutorials</a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</nav>
 
-{%block title%} shop {%endblock%}
-
-{%block css%} 
-
-.col-md-3
-{
-    display:inline-block;
-    margin-left: -4px;
-}
-.col-md-3 img{
-    width: 170px;
-    height: 200px;
-}
-.carousel-indicators :active{
-    background-color: blue;
-}
-body .carousel-indicators li{
-    background-color: blue;
-}
-body .carousel-indicators{
-    bottom: 0;
-}
-body .carousel-control-prev-icon,
-body .carousel-control-next-icon{
-    background-color: blue;
-    margin-top: -350px;
-}
-.carousel-control-prev,
-.carousel-control-next{
-    top: auto;
-    bottom: auto;
-    padding-top: 422px;
-}
-body .no-padding{
-     padding-left: 0;
-     padding-right: 0;
-}
-
-{%endblock%}
-
-{%block body%}
-        
-      {% load static%}
-      <!-- carousel -->
-      <div class="container">
-      <!-- slideshow starts here --> 
-      {% for product, range, nslides in allProds %}
-        <h1 class="my-4">Sale On {{product.0.category}} - Recommended Items</h1>  
-        <div class="row">
-        <div id="demo{{forloop.counter}}" class="col carousel slide my-3" data-rise="carousel">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#demo{{forloop.counter}}" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-
-            {% for i in range %}
-            <button type="button" data-bs-target="#demo{{forloop.parentloop.counter}}" data-bs-slide-to="{{i}}" aria-label="Slide 2"></button>
-            {% endfor %}
-            {% comment %} <button type="button" data-bs-target="#demo" data-bs-slide-to="2" aria-label="Slide 3"></button> {% endcomment %}
-            </div>
-              
-        <div class="container carousel-inner no=padding">
-            <div class="carousel-item active">
-                
-                 
-                {% for i in product %}
-                <div class="col-xs-3 col-sm-3 col-md-3">
-                    <div class="card align-items-center" style="width: 18rem;">
-                        <img src="/media/{{i.image}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">{{i.product_name}}</h5>
-                          <p class="card-text">{{i.description|slice:"0:50"}}.....</p>
-                          <button id="pr{{i.id}}" class="btn btn-primary cart">Add to cart</button>
-                          <a href="/shop/products/{{i.id}}"><button id="qv{{i.id}}" class="btn btn-primary cart">Quick View</button></a>
-                        </div>
-                      </div>
-                </div>
-                {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last%}
-              </div> <div class="carousel-item">
-                {% endif %}
       
-                {% endfor %}
+
+<div id="default-carousel" class="relative w-full h-full" data-carousel="slide">
+  <!-- Carousel wrapper -->
+  <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+       <!-- Item 1 -->
+      <div class="hidden duration-700 ease-in-out" data-carousel-item>
+          <img src="/media/slider.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."><br><br>
+          {% comment %} <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 me-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Red</button> {% endcomment %}
+      </div>
+      <!-- Item 2 -->
+      <div class="hidden duration-700 ease-in-out" data-carousel-item>
+          <img src="/media/ss.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+      </div>
+      <!-- Item 3 -->
+      <div class="hidden duration-700 ease-in-out" data-carousel-item>
+          <img src="/media/sslid.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+      </div>
+      <!-- Item 4 -->
+      <div class="hidden duration-700 ease-in-out" data-carousel-item>
+          <img src="/media/sl.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+      </div>
+  </div>
+  <!-- Slider indicators -->
+  {% comment %} <a href="report.html">
+  <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+      <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Report Now!</button>
+  </div>
+</a> {% endcomment %}
+  <!-- Slider controls -->
+  <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+          </svg>
+          <span class="sr-only">Previous</span>
+      </span>
+  </button>
+  <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+          </svg>
+          <span class="sr-only">Next</span>
+      </span>
+  </button>
+</div>
+
+<br><br>
+
+<div class="p-4 mb-4 text-sm text-black-600 rounded-lg bg-white-50 text-6xl ml-60">
+  <span class="text-3xl"><b>Saving one animal might not change the world,but for<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that one animal,the world changes forever.</b></span>
+</div>
+
+<br><br>
+
+<!-- numbers -->
+<div>
+<div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+  <div class="sm:hidden">
+      <label for="tabs" class="sr-only">Select tab</label>
+      <select id="tabs" class="bg-gray-50 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option>Statistics</option>
+          <option>Services</option>
+          <option>FAQ</option>
+      </select>
+  </div>
+  <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex dark:divide-gray-600 dark:text-gray-400 rtl:divide-x-reverse" id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
+      <li class="w-full">
+          <button id="stats-tab" data-tabs-target="#stats" type="button" role="tab" aria-controls="stats" aria-selected="true" class="inline-block w-full p-4 rounded-ss-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">Statistics</button>
+      </li>
+      <li class="w-full">
+          <button id="about-tab" data-tabs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="false" class="inline-block w-full p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">Services</button>
+      </li>
+      <li class="w-full">
+          <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="faq" aria-selected="false" class="inline-block w-full p-4 rounded-se-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">FAQ</button>
+      </li>
+  </ul>
+  <div id="fullWidthTabContent" class="border-t border-gray-200 dark:border-gray-600">
+      <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="stats" role="tabpanel" aria-labelledby="stats-tab">
+          <dl class="grid max-w-screen-xl grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-6 dark:text-white sm:p-8">
+              <div class="flex flex-col items-center justify-center">
+                  <dt class="mb-2 text-3xl font-extrabold">80M+</dt>
+                  <dd class="text-gray-500 dark:text-gray-400">Stray animals</dd>
               </div>
-            </div>
+              <div class="flex flex-col items-center justify-center">
+                  <dt class="mb-2 text-3xl font-extrabold">31M+</dt>
+                  <dd class="text-gray-500 dark:text-gray-400">Pet Dogs</dd>
+              </div>
+              <div class="flex flex-col items-center justify-center">
+                  <dt class="mb-2 text-3xl font-extrabold">2.44M+</dt>
+                  <dd class="text-gray-500 dark:text-gray-400">Pet Cats</dd>
+              </div>
+              <div class="flex flex-col items-center justify-center">
+                  <dt class="mb-2 text-3xl font-extrabold">591k+</dt>
+                  <dd class="text-gray-500 dark:text-gray-400">Pet Rabbit</dd>
+              </div>
+              <div class="flex flex-col items-center justify-center">
+                  <dt class="mb-2 text-3xl font-extrabold">50+</dt>
+                  <dd class="text-gray-500 dark:text-gray-400">Death every day</dd>
+              </div>
+              <div class="flex flex-col items-center justify-center">
+                  <dt class="mb-2 text-3xl font-extrabold">41M+</dt>
+                  <dd class="text-gray-500 dark:text-gray-400">Pet Owners</dd>
+              </div>
+          </dl>
+      </div>
+      <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="about" role="tabpanel" aria-labelledby="about-tab">
+          <!-- List -->
+          <ul role="list" class="space-y-4 text-gray-500 dark:text-gray-400">
+              <li class="flex space-x-2 rtl:space-x-reverse items-center">
+                  <svg class="flex-shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                  </svg>
+                  <span class="leading-tight">Connection to Hospitals</span>
+              </li>
+              <li class="flex space-x-2 rtl:space-x-reverse items-center">
+                  <svg class="flex-shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                  </svg>
+                  <span class="leading-tight">Connection to NGO's</span>
+              </li>
+              <li class="flex space-x-2 rtl:space-x-reverse items-center">
+                  <svg class="flex-shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                  </svg>
+                  <span class="leading-tight">Online consultation of vets</span>
+              </li>
+              <li class="flex space-x-2 rtl:space-x-reverse items-center">
+                  <svg class="flex-shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                  </svg>
+                  <span class="leading-tight">Pet food / Diet Plans recommandation</span>
+              </li>
+              <li class="flex space-x-2 rtl:space-x-reverse items-center">
+                <svg class="flex-shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                </svg>
+                <span class="leading-tight">Petting Services</span>
+            </li>
+          </ul>
+      </div>
+      <div class="hidden p-4 bg-white rounded-lg dark:bg-gray-800" id="faq" role="tabpanel" aria-labelledby="faq-tab">
+          <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-800 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+              <h2 id="accordion-flush-heading-1">
+                  <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+                  <span>What is FurryFam?</span>
+                  <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                  </svg>
+                  </button>
+              </h2>
+              <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
+                  <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                  <p class="mb-2 text-gray-500 dark:text-gray-400">FurryFam connect pet owners and stray animals with caring veterinarians. Whether you're a pet owner in need of veterinary services or a compassionate soul looking to help stray animals, we've got you covered. Our directory makes it easy to find a vet who specializes in caring for stray animals, right in your area. For pet owners, we offer essential information about veterinary services, from routine check-ups . Plus, we provide grooming tutorials with step-by-step videos and training tips to help you keep your furry friends happy and healthy. Join our community and make a difference in the lives of animals today!</p>
+                  <p class="text-gray-500 dark:text-gray-400"> <a href="/docs/getting-started/introduction/" class="text-blue-600 dark:text-blue-500 hover:underline"></a></p>
+                  </div>
+              </div>
+              <h2 id="accordion-flush-heading-2">
+                  <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
+                  <span>what FurryFam provides?</span>
+                  <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                  </svg>
+                  </button>
+              </h2>
+              <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
+                  <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                  <p class="mb-2 text-gray-500 dark:text-gray-400"></p>
+                  <p class="text-gray-500 dark:text-gray-400"><a href="https://flowbite.com/figma/" class="text-blue-600 dark:text-blue-500 hover:underline"></a> </p>
+                  </div>
+              </div>
+              <h2 id="accordion-flush-heading-3">
+                  <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-3" aria-expanded="false" aria-controls="accordion-flush-body-3">
+                  <span>Why choose shakti over other websites?</span>
+                  <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                  </svg>
+                  </button>
+              </h2>
+              <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
+                  <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                  <p class="mb-2 text-gray-500 dark:text-gray-400">The main difference is that the core components from Flowbite are open source under the MIT license, whereas Tailwind UI is a paid product. Another difference is that Flowbite relies on smaller and standalone components, whereas Tailwind UI offers sections of pages.</p>
+                  <p class="mb-2 text-gray-500 dark:text-gray-400">However, we actually recommend using both Flowbite, Flowbite Pro, and even Tailwind UI as there is no technical reason stopping you from using the best of two worlds.</p>
+                  <p class="mb-2 text-gray-500 dark:text-gray-400">Learn more about these technologies:</p>
+                  <ul class="ps-5 text-gray-500 list-disc dark:text-gray-400">
+                      <li><a href="https://flowbite.com/pro/" class="text-blue-600 dark:text-blue-500 hover:underline">Flowbite Pro</a></li>
+                      <li><a href="https://tailwindui.com/" rel="nofollow" class="text-blue-600 dark:text-blue-500 hover:underline">Tailwind UI</a></li>
+                  </ul>
+                  </div>
+              </div>
           </div>
-        
-        <!-- left and right controls for the slide -->
-            <a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </a>
-            <a class="carousel-control-next" href="#demo{{forloop.counter}}" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </a> 
-          </div>
-  {% endfor %} 
-{%endblock%}
+      </div>
+  </div>
+</div>
+</div><br><br>
+
+<!-- about -->
+<div class=""><br>
+    <div class="text-5xl text-black text-center font-bold">
+      <h1>About Us</h1>
+    </div>
+    <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700 mr-40 ml-40"><br>
+    <div class="flex">
+      <div class="flex-1 ml-36 text-xl font-normal"><h2>Through our website we connect pet owners and stray animals with caring veterinarians. Whether you're a pet owner in need of veterinary services or a compassionate soul looking to help stray animals, we've got you covered. Our directory makes it easy to find a vet who specializes in caring for stray animals, right in your area. For pet owners, we offer essential information about veterinary services, from routine check-ups . Plus, we provide grooming tutorials with step-by-step videos and training tips to help you keep your furry friends happy and healthy. Join our community and make a difference in the lives of animals today! </h2></div>
+      <div class="flex-2 float-right mr-20 w-60"><img src="/media/slide.png"></div>
+    </div>
+</div>
+<br><br><br><br>
+
+<!-- cards -->
+<div class="flex">
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex-1 ml-10">
+  <a href="#">
+      <img class="rounded-t-lg" src="images\police.jpg" alt="" />
+  </a>
+  <div class="p-5">
+      <a href="#">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Hospitals</h5>
+      </a>
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Hospitals for animals serve a critical role in safeguarding the health and well-being of both domestic and wild animals</p>
+      <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:outline-none">
+        <button type="button" class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"> Lists
+          <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2 float-right mt-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+        </button>
+      </a>
+  </div>
+</div>
+
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex-2 ml-10">
+  <a href="#">
+      <img class="rounded-t-lg" src="images\advocate.jpg" alt="" />
+  </a>
+  <div class="p-5">
+      <a href="#">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">NGO's</h5>
+      </a>
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">NGOs dedicated to stray animals play a vital role in society by addressing the needs of vulnerable animals and promoting their welfare.</p>
+      <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:outline-none">
+        <button type="button" class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">  Lists
+          <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2 float-right mt-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+        </button>
+      </a>
+  </div>
+</div>
+
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex-2 ml-10">
+  <a href="#">
+      <img class="rounded-t-lg" src="images\advocate.jpg" alt="" />
+  </a>
+  <div class="p-5">
+      <a href="#">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">PetSitting</h5>
+      </a>
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Pet sitting plays a crucial role in providing temporary care and support for pets when their owners are unable to attend to them due to various reasons.</p>
+      <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:outline-none">
+        <button type="button" class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">  Lists
+          <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2 float-right mt-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+        </button>
+      </a>
+  </div>
+</div>
+</div>
+<br><br><br><br>
+
+<!-- therapists -->
+
+<div class="text-5xl text-black font-bold ml-20">
+  <h1>Why FurryFam  ??</h1>
+</div>
+<div class="flex">
+    <div class="flex-1 ml-20 mt-20 font-medium">
+      FurryFam is a platform that aims to connect pet owners with NGOs and veterinary services, providing a network for pet care and support.<br> FurryFam allows pet owners to search for NGOs and veterinary services in their area, view their services, and connect with them for pet care needs.<br>FurryFam provides a directory of veterinary hospitals and clinics where pet owners can find medical services for their pets.<br><br>
+      The term "furry" evokes images of animals with fur, highlighting the focus on pets and stray animals, while "fam" suggests a sense of community and belonging, emphasizing the importance of building connections between veterinarians, pet owners, and stray animal caregivers.<br><br>
+      You can view profiles, read reviews, and schedule appointments directly through the platform.
+    </div>
+    <div class="flex-2">
+      <img src="/media/sl">
+    </div>
+</div>
+<br><br><br><br>
+
+<div class="text-5xl">
+  <div class="text-red-900 text-center font-bold">Veterinarians </div>
+  <hr class="h-px my-8 bg-red-900 border-0 dark:bg-red-900 mr-40 ml-40"><br>
+</div>
+
+<!-- therapists card -->
+
+<div class="flex">
+<div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gradient-to-r from-sky-950 from-10% via-sky-900 via-30% to-sky-800 to-90% dark:border-gray-700 ml-10 flex-2 mr-10">
+  <div class="flex justify-end px-4 pt-4">
+      <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+          <span class="sr-only">Open dropdown</span>
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="" fill="currentColor" viewBox="0 0 16 3">
+              <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+          </svg>
+      </button>
+      <!-- Dropdown menu -->
+      <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+          <ul class="py-2" aria-labelledby="dropdownButton">
+          <li>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+          </li>
+          <li>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
+          </li>
+          <li>
+              <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+          </li>
+          </ul>
+      </div>
+  </div>
+  <div class="flex flex-col items-center pb-10">
+      <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/media/doc1.jpg" alt="Bonnie image"/>
+      <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Rebecca Johnson</h5>
+      <span class="text-sm text-gray-500 dark:text-gray-400">Orthopedics & Neurology</span>
+      <div class="flex mt-4 md:mt-6">
+          <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Connect</a>
+          <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3">Message</a>
+      </div>
+  </div>
+</div><br><br>
+
+<div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gradient-to-r from-sky-950 from-10% via-sky-900 via-30% to-sky-800 to-90% dark:border-gray-700 ml-10 flex-3 mr-10">
+  <div class="flex justify-end px-4 pt-4">
+      <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+          <span class="sr-only">Open dropdown</span>
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+              <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+          </svg>
+      </button>
+      <!-- Dropdown menu -->
+      <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+          <ul class="py-2" aria-labelledby="dropdownButton">
+          <li>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+          </li>
+          <li>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
+          </li>
+          <li>
+              <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+          </li>
+          </ul>
+      </div>
+  </div>
+  <div class="flex flex-col items-center pb-10">
+      <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/media/doc2.jpg"/>
+      <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Joseph Nicole</h5>
+      <span class="text-sm text-gray-500 dark:text-gray-400">Cardiology, Diagnostic imaging & Internal medicine</span>
+      <div class="flex mt-4 md:mt-6">
+          <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Connect</a>
+          <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3">Message</a>
+      </div>
+  </div>
+</div>
+
+<div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gradient-to-r from-sky-950 from-10% via-sky-900 via-30% to-sky-800 to-90% dark:border-gray-700 ml-10 flex-4 mr-10">
+  <div class="flex justify-end px-4 pt-4">
+      <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+          <span class="sr-only">Open dropdown</span>
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+              <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+          </svg>
+      </button>
+      <!-- Dropdown menu -->
+      <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+          <ul class="py-2" aria-labelledby="dropdownButton">
+          <li>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+          </li>
+          <li>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
+          </li>
+          <li>
+              <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+          </li>
+          </ul>
+      </div>
+  </div>
+  <div class="flex flex-col items-center pb-10">
+      <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/media/doc3.jpg"/>
+      <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green </h5>
+      <span class="text-sm text-gray-500 dark:text-gray-400">Ophthalmology, Avian and exotic medicine</span>
+      <div class="flex mt-4 md:mt-6">
+          <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Connect</a>
+          <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3">Message</a>
+      </div>
+  </div>
+</div>
+</div><br><br>
 
 
-{%block js %} 
+<div class="flex">
+  <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gradient-to-r from-sky-950 from-10% via-sky-900 via-30% to-sky-800 to-90% dark:border-gray-700 ml-10 flex-2 mr-10">
+    <div class="flex justify-end px-4 pt-4">
+        <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+            <span class="sr-only">Open dropdown</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+            </svg>
+        </button>
+        <!-- Dropdown menu -->
+        <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2" aria-labelledby="dropdownButton">
+            <li>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+            </li>
+            <li>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
+            </li>
+            <li>
+                <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+            </li>
+            </ul>
+        </div>
+    </div>
+    <div class="flex flex-col items-center pb-10">
+        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/media/doc6.jpg"/>
+        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Stephanie Gemma</h5>
+        <span class="text-sm text-gray-500 dark:text-gray-400">Internal Medicine and Parasitology</span>
+        <div class="flex mt-4 md:mt-6">
+            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Connect</a>
+            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3">Message</a>
+        </div>
+    </div>
+  </div><br><br>
+  
+  <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gradient-to-r from-sky-950 from-10% via-sky-900 via-30% to-sky-800 to-90% dark:border-gray-700 ml-10 flex-3 mr-10">
+    <div class="flex justify-end px-4 pt-4">
+        <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+            <span class="sr-only">Open dropdown</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+            </svg>
+        </button>
+        <!-- Dropdown menu -->
+        <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2" aria-labelledby="dropdownButton">
+            <li>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+            </li>
+            <li>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
+            </li>
+            <li>
+                <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+            </li>
+            </ul>
+        </div>
+    </div>
+    <div class="flex flex-col items-center pb-10">
+        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/media/doc5.jpg"/>
+        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Emma Heather</h5>
+        <span class="text-sm text-gray-500 dark:text-gray-400">Internal medicine</span>
+        <div class="flex mt-4 md:mt-6">
+            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Connect</a>
+            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3">Message</a>
+        </div>
+    </div>
+  </div>
+  
+  <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gradient-to-r from-sky-950 from-10% via-sky-900 via-30% to-sky-800 to-90% dark:border-gray-700 ml-10 flex-4 mr-10">
+    <div class="flex justify-end px-4 pt-4">
+        <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+            <span class="sr-only">Open dropdown</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+            </svg>
+        </button>
+        <!-- Dropdown menu -->
+        <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2" aria-labelledby="dropdownButton">
+            <li>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+            </li>
+            <li>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</a>
+            </li>
+            <li>
+                <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+            </li>
+            </ul>
+        </div>
+    </div>
+    <div class="flex flex-col items-center pb-10">
+        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/media/doc4.jpg" alt="Bonnie image"/>
+        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Robert Pattinson</h5>
+        <span class="text-sm text-gray-500 dark:text-gray-400">Veterinary Gynaecology and Obstetrics</span>
+        <div class="flex mt-4 md:mt-6">
+            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Connect</a>
+            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3">Message</a>
+        </div>
+    </div>
+  </div>
+  </div><br><br>
+<br><br>
 
-    <script>
-      // Finding card items from local storage 
-      if(localStorage.getItem('cart') == null){
-      var cart = {};
-      }
-      else
-      {
-      cart = JSON.parse(localStorage.getItem('cart'));
-      document.getElementById('cart').innerHTML = Object.keys(cart).length;
-      }
-      $('.cart').click(function(){
-      console.log('clicked');
-      var idstr = this.id.toString();
-      console.log(idstr);
-      if (cart[idstr] != undefined){
-      cart[idstr] = cart[idstr] + 1;
-      }
-      else
-      {
-      cart[idstr] = 1;
-      }
-      console.log(cart);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      document.getElementById('cart').innerHTML = Object.keys(cart).length;
-      });
+<!-- videos -->
 
-      $('#popcart').popover()
-      document.getElementById("popcart".setAttribute('data-content', '<h5>Cart for your items</h5>'));
-   </script>
+<div class="text-4xl ml-20 font-medium">
+  Refer the videos to train and groom your pets .....
+  <hr class="h-px my-8 bg-slate-900 border-0 dark:bg-slate-900 mr-20"><br>
+</div>
+<div class="flex">
+<!-- <video class="ml-40 mr-40 flex-1 w-20" autoplay muted controls>
+  <source src="images\GOOD TOUCH & BAD TOUCH.mp4" type="video/mp4">
+</video><br><br> -->
 
-{% endblock %}
+{% comment %} <video class="mr-40 ml-40 flex-1 w-40" autoplay muted controls> {% endcomment %}
+  <iframe width="1263" height="480" src="https://www.youtube.com/embed/OjajcBKkkDI" title="cats care at home for beginners|cats videos|interesting facts about cats| common mistake beginner do" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<br><br>
+</div><br><br><br><br>
+
+<div class="flex">
+  {% comment %} <video class="ml-40 mr-40 flex-1 w-40" autoplay muted controls>
+    <source src="images\Self-Defense.mp4" type="video/mp4"> {% endcomment %}
+    <iframe width="1263" height="480" src="https://www.youtube.com/embed/Kj7ihQJuc3E" title="How to Pee and Potty Train your Puppy at Home | How I Did it (You will Thank Me for This)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </video><br><br>
+  
+  <!-- <video class="mr-40 flex-2 w-40" autoplay muted controls>
+    <source src="images\Bad Touch in H.mp4" type="video/mp4">
+  </video><br><br> -->
+  </div>
+<br><br><br><br>
+
+<!-- footer -->
+
+
+<footer class="bg-white rounded-lg shadow dark:bg-gray-700">
+  <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+      <div class="sm:flex sm:items-center sm:justify-between">
+          <a href="#" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+              <img src="/media/logo.jpg" class="h-8" alt="Flowbite Logo" />
+              <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">FurryFam</span>
+          </a>
+          <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+              <li>
+                  <a href="#" class="hover:underline me-4 md:me-6">About</a>
+              </li>
+              <li>
+                  <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+              </li>
+              <li>
+                  <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+              </li>
+              <li>
+                  <a href="#" class="hover:underline">Contact</a>
+              </li>
+          </ul>
+      </div>
+      <hr class="my-6 border-black-200 sm:mx-auto dark:border-black-700 lg:my-8" />
+      <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">furryfam</a>. All Rights Reserved.<br>By Team Rudra</span>
+  </div>
+</footer>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    {% endblock %}
+</body>
+</html>

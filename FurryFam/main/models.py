@@ -13,9 +13,24 @@ class Product(models.Model):
 
 class Login(models.Model):
     msg_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
-    email = models.CharField(max_length=80 , default="")
-    phone = models.CharField(max_length=80 , default="")
+    name = models.CharField(max_length=50, default='')
+    # email = models.CharField(max_length=80 , default="")
+    # phone = models.CharField(max_length=80 , default="")
+    pss = models.CharField(max_length=20, default='')
 
     def __str__(self):
         return self.name
+    
+
+class Place(models.Model):
+    name = models.CharField(max_length=200)
+    address = models.TextField()
+    place_id = models.CharField(max_length=100, unique=True)
+
+class PetPlace(models.Model):
+    place = models.OneToOneField(Place, on_delete=models.CASCADE)
+    place_type = models.CharField(max_length=50, choices=(
+        ('hospital', 'Animal Hospital/Clinic'),
+        ('sitter', 'Pet Sitter'),
+        ('ngo', 'Pet-related NGO')
+    ))

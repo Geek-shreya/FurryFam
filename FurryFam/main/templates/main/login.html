@@ -12,7 +12,7 @@
 
 {%block body %} 
 
-<div class="container my-3">
+{% comment %} <div class="container my-3">
     <h3>Log In</h3>
     <form action="/main/login/" method="post">{% csrf_token %}
  <div class="form-group">
@@ -39,11 +39,45 @@
     <input type="password" class="form-control" id="phone" name="phone" placeholder="Verify Password">
   </div>
          <div class="form-group">
-  {% comment %} <div class="form-group">
-   <label for="desc">How May We Help You ?</label>
-   <textarea class="form-control" id="desc" name="desc" rows="3"></textarea>
- </div> {% endcomment %}
 
- <button type="submit" class="btn btn-success my-4">Submit</button>
+ <button type="submit" class="btn btn-success my-4">Submit</button> {% endcomment %}
+
+
+ <body class="bg-gray-300"
+      style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+       'Open Sans','Helvetica Neue', sans-serif;">
+      <div class="h-screen flex items-center justify-center">
+          <form action="/main/login/" method="post" class="w-full md:w-1/3 bg-white rounded-lg items-center">{% csrf_token %}
+              <div class="flex font-bold justify-center mt-6">
+                  <img src="data:image/png;base64,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" alt="" class="h-24 w-24">
+              </div>
+              <h2 class="text-3xl text-center text-gray-700 mb-4">Log In</h2>
+              <div class="px-12 pb-10">
+                  <div class="w-full mb-2">
+                      <div class="flex justify-center">
+                          <input type="text" placeholder="Username"
+                              class="px-8 w-full border rounded py-2 text-gray-700
+       focus:outline-none items-center id="name" name="name" ">
+                      </div>
+                      {% comment %} <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name"> {% endcomment %}
+                  </div>
+                  <div class="w-full mb-2">
+                      <div class="flex justify-center">
+                          <input type="password" placeholder="Password"
+                              class="px-8 w-full border rounded py-2 text-gray-700 focus:outline-none id="phone" name="phone"">
+                      </div>
+                  </div>
+                   <button class="w-full mt-6 py-2 rounded bg-purple-500 text-gray-100 focus:outline-none">Log In
+      </button>
+                  <a href="#"
+                      class="text-sm text-opacity-200 float-right mt-6 mb-4 hover:text-purple-600 underline">
+                              Forget Password?
+                  </a>
+                   <a href="#"
+                     class="text-sm text-opacity-200 float-left mt-6 mb-8 hover:text-purple-600 underline">
+                      Create Account
+                    </a>
+              </div>
+      </div>
 
 {% endblock %}
